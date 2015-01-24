@@ -52,8 +52,30 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Function returns the inverse of a matrix. Checks the cache
+## first if available, if not, calclates and returns.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    
+    ## Return a matrix that is the inverse of 'x'
+    invMat = x$getMatInv()
+    
+    ## Return if inverse already calc
+    if(!is.null(invMat)){
+        message("getting cached data")
+        return(invMat)
+    }
+    
+    ## If inverse not calculated, perform calc
+    data = x$getMat()
+    
+    ## Calculate the inverse
+    ## the solve function returns the inverse of a square matrix
+    m = solve(data)
+    
+    ## Set the inverse in object
+    x$setMatInv(m)
+    
+    ## Return inverse
+    m
 }
